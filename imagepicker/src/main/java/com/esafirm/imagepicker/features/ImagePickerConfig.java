@@ -2,7 +2,6 @@ package com.esafirm.imagepicker.features;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.StyleRes;
 
 import com.esafirm.imagepicker.features.common.BaseConfig;
 import com.esafirm.imagepicker.features.imageloader.ImageLoader;
@@ -11,7 +10,10 @@ import com.esafirm.imagepicker.model.Image;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ImagePickerConfig extends BaseConfig implements Parcelable {
+import androidx.annotation.StyleRes;
+
+public class ImagePickerConfig extends BaseConfig implements Parcelable
+{
 
     static final int NO_COLOR = -1;
 
@@ -26,6 +28,7 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
     private int mode;
     private int limit;
     private int theme;
+    private int toolbarTitleColor;
 
     private boolean folderMode;
     private boolean includeVideo;
@@ -35,129 +38,173 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
 
     private transient String language;
 
-    public ImagePickerConfig() {
+    public ImagePickerConfig()
+    {
     }
 
-    public int getArrowColor() {
+    public int getArrowColor()
+    {
         return arrowColor;
     }
 
-    public void setArrowColor(int arrowColor) {
+    public void setArrowColor(int arrowColor)
+    {
         this.arrowColor = arrowColor;
     }
 
-    public int getMode() {
+    public int getMode()
+    {
         return mode;
     }
 
-    public void setMode(int mode) {
+    public void setMode(int mode)
+    {
         this.mode = mode;
     }
 
-    public int getLimit() {
+    public int getLimit()
+    {
         return limit;
     }
 
-    public void setLimit(int limit) {
+    public void setLimit(int limit)
+    {
         this.limit = limit;
     }
 
-    public boolean isShowCamera() {
+    public boolean isShowCamera()
+    {
         return showCamera;
     }
 
-    public void setShowCamera(boolean showCamera) {
+    public void setShowCamera(boolean showCamera)
+    {
         this.showCamera = showCamera;
     }
 
-    public boolean isIncludeVideo() {
+    public boolean isIncludeVideo()
+    {
         return includeVideo;
     }
 
-    public void setIncludeVideo(boolean includeVideo) {
+    public void setIncludeVideo(boolean includeVideo)
+    {
         this.includeVideo = includeVideo;
     }
 
-    public String getFolderTitle() {
+    public String getFolderTitle()
+    {
         return folderTitle;
     }
 
-    public void setFolderTitle(String folderTitle) {
+    public void setFolderTitle(String folderTitle)
+    {
         this.folderTitle = folderTitle;
     }
 
-    public String getImageTitle() {
+    public String getImageTitle()
+    {
         return imageTitle;
     }
 
-    public void setImageTitle(String imageTitle) {
+    public void setImageTitle(String imageTitle)
+    {
         this.imageTitle = imageTitle;
     }
 
-    public String getDoneButtonText() {
+    public String getDoneButtonText()
+    {
         return doneButtonText;
     }
 
-    public void setDoneButtonText(String doneButtonText) {
+    public void setDoneButtonText(String doneButtonText)
+    {
         this.doneButtonText = doneButtonText;
     }
 
-    public ArrayList<Image> getSelectedImages() {
+    public ArrayList<Image> getSelectedImages()
+    {
         return selectedImages;
     }
 
-    public void setSelectedImages(ArrayList<Image> selectedImages) {
+    public void setSelectedImages(ArrayList<Image> selectedImages)
+    {
         this.selectedImages = selectedImages;
     }
 
-    public ArrayList<File> getExcludedImages() {
+    public ArrayList<File> getExcludedImages()
+    {
         return excludedImages;
     }
 
-    public void setExcludedImages(ArrayList<Image> excludedImages) {
-        if (excludedImages != null && !excludedImages.isEmpty()) {
+    public void setExcludedImages(ArrayList<Image> excludedImages)
+    {
+        if (excludedImages != null && !excludedImages.isEmpty())
+        {
             this.excludedImages = new ArrayList<>();
-            for (Image image : excludedImages) {
+            for (Image image : excludedImages)
+            {
                 this.excludedImages.add(new File(image.getPath()));
             }
-        } else {
+        }
+        else
+        {
             this.excludedImages = null;
         }
     }
 
-    public void setExcludedImageFiles(ArrayList<File> excludedImages) {
+    public void setExcludedImageFiles(ArrayList<File> excludedImages)
+    {
         this.excludedImages = excludedImages;
     }
 
-    public boolean isFolderMode() {
+    public boolean isFolderMode()
+    {
         return folderMode;
     }
 
-    public void setFolderMode(boolean folderMode) {
+    public void setFolderMode(boolean folderMode)
+    {
         this.folderMode = folderMode;
     }
 
-    public void setTheme(@StyleRes int theme) {
+    public void setTheme(@StyleRes int theme)
+    {
         this.theme = theme;
     }
 
-    public int getTheme() {
+    public int getTheme()
+    {
         return theme;
     }
 
-    public void setImageLoader(ImageLoader imageLoader) {
+    public void setToolbarTitleColor(int toolbarTitleColor)
+    {
+        this.toolbarTitleColor = toolbarTitleColor;
+    }
+
+    public int getToolbarTitleColor()
+    {
+        return toolbarTitleColor;
+    }
+
+    public void setImageLoader(ImageLoader imageLoader)
+    {
         this.imageLoader = imageLoader;
     }
 
-    public ImageLoader getImageLoader() {
+    public ImageLoader getImageLoader()
+    {
         return imageLoader;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(String language)
+    {
         this.language = language;
     }
 
-    public String getLanguage() {
+    public String getLanguage()
+    {
         return language;
     }
 
@@ -166,17 +213,20 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
     /* --------------------------------------------------- */
 
     @Override
-    public int describeContents() {
+    public int describeContents()
+    {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags)
+    {
         super.writeToParcel(dest, flags);
         dest.writeTypedList(this.selectedImages);
 
         dest.writeByte((byte) (excludedImages != null ? 1 : 0));
-        if (excludedImages != null) {
+        if (excludedImages != null)
+        {
             dest.writeList(this.excludedImages);
         }
 
@@ -187,18 +237,21 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
         dest.writeInt(this.mode);
         dest.writeInt(this.limit);
         dest.writeInt(this.theme);
+        dest.writeInt(this.toolbarTitleColor);
         dest.writeByte(this.folderMode ? (byte) 1 : (byte) 0);
         dest.writeByte(this.includeVideo ? (byte) 1 : (byte) 0);
         dest.writeByte(this.showCamera ? (byte) 1 : (byte) 0);
         dest.writeSerializable(this.imageLoader);
     }
 
-    protected ImagePickerConfig(Parcel in) {
+    protected ImagePickerConfig(Parcel in)
+    {
         super(in);
         this.selectedImages = in.createTypedArrayList(Image.CREATOR);
 
         boolean isPresent = in.readByte() != 0;
-        if (isPresent) {
+        if (isPresent)
+        {
             this.excludedImages = new ArrayList<>();
             in.readList(this.excludedImages, File.class.getClassLoader());
         }
@@ -210,21 +263,27 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
         this.mode = in.readInt();
         this.limit = in.readInt();
         this.theme = in.readInt();
+        this.toolbarTitleColor = in.readInt();
         this.folderMode = in.readByte() != 0;
         this.includeVideo = in.readByte() != 0;
         this.showCamera = in.readByte() != 0;
         this.imageLoader = (ImageLoader) in.readSerializable();
     }
 
-    public static final Creator<ImagePickerConfig> CREATOR = new Creator<ImagePickerConfig>() {
+    public static final Creator<ImagePickerConfig> CREATOR = new Creator<ImagePickerConfig>()
+    {
         @Override
-        public ImagePickerConfig createFromParcel(Parcel source) {
+        public ImagePickerConfig createFromParcel(Parcel source)
+        {
             return new ImagePickerConfig(source);
         }
 
         @Override
-        public ImagePickerConfig[] newArray(int size) {
+        public ImagePickerConfig[] newArray(int size)
+        {
             return new ImagePickerConfig[size];
         }
     };
+
+
 }
